@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' show_page_front(34232)
+#' \dontrun{show_page_front(34232)}
 show_wpage_front <- function(course_id){
   # GET /api/v1/courses/:course_id/front_page
   url <- paste0(canvas_url(), file.path("courses", course_id, "front_page"))

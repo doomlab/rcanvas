@@ -7,14 +7,14 @@
 get_group_category(group_category_id)
 }
 \arguments{
-\item{group_category_id}{}
+\item{group_category_id}{id number for the category}
 }
 \value{
-
+dataframe of category ids
 }
 \description{
 Get a single group category
 }
 \examples{
-get_group_category(52872)
+\dontrun{get_group_category(52872)}
 }

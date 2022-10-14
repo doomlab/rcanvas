@@ -8,7 +8,7 @@
 #'
 #' @examples
 #'
-#' get_user_items(365, "details")
+#' \dontrun{get_user_items(365, "details")}
 get_user_items <- function(user_id, item) {
   if (item == "page_views") warning("Not all page views will be returned.")
 

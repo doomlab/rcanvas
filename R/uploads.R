@@ -20,7 +20,7 @@
 #' @export
 #'
 #' @examples
-#' upload_course_file(course_id = 13212, file_name = "activity.pdf")
+#' \dontrun{upload_course_file(course_id = 13212, file_name = "activity.pdf")}
 upload_course_file <- function(course_id, file_name, parent_folder_id = NULL, parent_folder_path = "/", on_duplicate = "overwrite") {
 
   url <- make_canvas_url("courses", course_id, "files")
@@ -41,6 +41,7 @@ upload_assignment_file <- function(course_id, assignment_id, user_id,
 
 }
 
+#' @export
 upload_file <- function(url, file_name, parent_folder_id = NULL, parent_folder_path = "/", on_duplicate = "overwrite") {
   if (!is.null(parent_folder_id) && !is.null(parent_folder_path)) stop("Do not specify both parent folder id and parent folder path.")
   file_size <- file.info(file_name)$size
@@ -114,12 +115,12 @@ create_course_folder <- function(course_id, name, parent_folder_id = NULL) {
 #' @param omit_from_final_grade boolean - Whether this assignment is counted towards a student's final grade.
 #' @param quiz_lti boolean - Whether this assignment should use the Quizzes 2 LTI tool. Sets the submission type to 'external_tool' and configures the external tool attributes to use the Quizzes 2 LTI tool configured for this course. Has no effect if no Quizzes 2 LTI tool is configured.
 #'
-#' @return
+#' @return invisible
 #' @export
 #'
 #' @examples
-#' create_course_assignment(course_id = 432432, name = "Challenging Assignment")
-#' create_course_assignment(course_id = 3432432, name = "R Packages, Review", peer_reviews = TRUE, points_possible = 100, omit_from_final_grade = TRUE)
+#' \dontrun{create_course_assignment(course_id = 432432, name = "Challenging Assignment")}
+#' \dontrun{create_course_assignment(course_id = 3432432, name = "R Packages, Review", peer_reviews = TRUE, points_possible = 100, omit_from_final_grade = TRUE)}
 create_course_assignment <- function(course_id, name, position = NULL, submission_types = NULL, allowed_extensions = NULL, turnitin_enabled = NULL,
                                     vericite_enabled = NULL, turnitin_settings = NULL, integration_data = NULL, integration_id = NULL, peer_reviews = NULL,
                                     automatic_peer_reviews = NULL, notify_of_update = NULL, group_category_id = NULL, grade_group_students_individually = NULL,

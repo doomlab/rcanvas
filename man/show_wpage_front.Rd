@@ -16,5 +16,5 @@ data.frame with front page information
 Show Front Page
 }
 \examples{
-show_page_front(34232)
+\dontrun{show_page_front(34232)}
 }

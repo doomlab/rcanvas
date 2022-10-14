@@ -11,6 +11,7 @@
 #' @param args query arguments to be passed to \code{httr}, e.g. auth token
 #'
 #' @return processed dataframe or list if unable to simplify
+#' @export
 #' @importFrom magrittr `%>%`
 process_response <- function(url, args) {
 
@@ -43,7 +44,7 @@ process_response <- function(url, args) {
 #' @param showProgress if TRUE (default), show a textual progress bar
 #'
 #' @return unparsed responses
-#'
+#' @export
 #' @examples
 #' \dontrun{resp <- canvas_query(url, args, "HEAD")
 #' get_pages(resp)}
@@ -104,17 +105,20 @@ paginate <- function(x, showProgress=T) {
   }
 }
 
+#' @export
 increment_pages <- function(base_url, n_pages) {
   # odd regex but necessary, see http://regexr.com/3evr4
   stringr::str_replace(base_url, "([\\?&])(page=[0-9a-zA-Z]{1,})",
                        sprintf("\\1page=%s", n_pages))
 }
 
+#' @export
 has_rel <- function(x, rel) {
   stopifnot(!is.null(rel))
   any(grepl(paste0("rel=\"", rel, "\""), x))
 }
 
+#' @export
 get_page <- function(resp, page) {
   pages <- resp$headers$link
   url_pattern <- "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"

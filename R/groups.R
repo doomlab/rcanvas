@@ -75,6 +75,7 @@ get_group_users <- function(group_id, group_name) {
 #' @param group_id the group ID
 #' @param user_id the user ID
 #' @rdname groups
+#' @export
 #' @examples
 #' \dontrun{add_group_users(group_id=23, user_ids=327))}
 add_group_user <- function(group_id, user_id) {
@@ -127,14 +128,14 @@ get_course_user_groups <- function(course_id) {
 
 #' Group categories
 #'
-#' @param context_id
-#' @param context_type
+#' @param context_id number of the course
+#' @param context_type either courses or accounts
 #'
-#' @return
+#' @return dataframe of group categories
 #' @export
 #'
 #' @examples
-#' get_group_categories(1350207)
+#' \dontrun{get_group_categories(1350207)}
 get_group_categories <- function(context_id, context_type = "courses") {
   stopifnot(context_type %in% c("courses", "accounts"))
   url <- paste0(canvas_url(), paste(context_type, context_id,
@@ -148,13 +149,13 @@ get_group_categories <- function(context_id, context_type = "courses") {
 
 #' Get a single group category
 #'
-#' @param group_category_id
+#' @param group_category_id id number for the category
 #'
-#' @return
+#' @return dataframe of category ids
 #' @export
 #'
 #' @examples
-#' get_group_category(52872)
+#' \dontrun{get_group_category(52872)}
 get_group_category <- function(group_category_id) {
   url <- paste0(canvas_url(), paste("group_categories", group_category_id,
                                     sep = "/"))
@@ -169,19 +170,20 @@ get_group_category <- function(group_category_id) {
 #'
 #' Does not work yet. Returns 422. Unclear how to fix.
 #'
-#' @param context_id
-#' @param context_type
+#' @param context_id course context id
+#' @param context_type either courses or accounts
 #' @param cat_name Name of the group category. Required.
 #' @param self_signup Allow students to sign up for a group themselves (Course Only). valid values are: “enabled”, allows students to self sign up for any group in course;  “restricted” allows students to self sign up only for groups in the same section null disallows self sign up
 #' @param auto_leader Assigns group leaders automatically when generating and allocating students to groups. Valid values are: “first” the first student to be allocated to a group is the leader; “random” a random student from all members is chosen as the leader
 #' @param group_limit Limit the maximum number of users in each group (Course Only). Requires self signup.
 #' @param create_group_count Create this number of groups (Course Only).
 #'
-#' @return
+#' @return invisible
+#' @export
 #'
 #' @examples
-#' create_group_category(1350207, "courses", "FinalProjectGroup",
-#' "enabled", "first", 3, 48)
+#' \donrun{create_group_category(1350207, "courses", "FinalProjectGroup",
+#' "enabled", "first", 3, 48)}
 create_group_category <- function(context_id, context_type = "courses",
                                   cat_name, self_signup = NULL,
                                   auto_leader = NULL, group_limit = NULL,
@@ -221,6 +223,7 @@ get_group_categories <- function(course_id) {
 #' @param name the name of the new group
 #' @param description Description of the new group
 #' @param join_level Join level of the new group (who can join the group)
+#' @export
 #' @examples
 #' \dontrun{add_group(category=128,name="group name", description="description", join_level="invitation_only")}
 #'

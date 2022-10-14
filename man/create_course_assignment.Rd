@@ -99,12 +99,12 @@ create_course_assignment(
 \item{quiz_lti}{boolean - Whether this assignment should use the Quizzes 2 LTI tool. Sets the submission type to 'external_tool' and configures the external tool attributes to use the Quizzes 2 LTI tool configured for this course. Has no effect if no Quizzes 2 LTI tool is configured.}
 }
 \value{
-
+invisible
 }
 \description{
 Create a course assignment
 }
 \examples{
-create_course_assignment(course_id = 432432, name = "Challenging Assignment")
-create_course_assignment(course_id = 3432432, name = "R Packages, Review", peer_reviews = TRUE, points_possible = 100, omit_from_final_grade = TRUE)
+\dontrun{create_course_assignment(course_id = 432432, name = "Challenging Assignment")}
+\dontrun{create_course_assignment(course_id = 3432432, name = "R Packages, Review", peer_reviews = TRUE, points_possible = 100, omit_from_final_grade = TRUE)}
 }

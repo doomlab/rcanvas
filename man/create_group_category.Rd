@@ -15,6 +15,10 @@ create_group_category(
 )
 }
 \arguments{
+\item{context_id}{course context id}
+
+\item{context_type}{either courses or accounts}
+
 \item{cat_name}{Name of the group category. Required.}
 
 \item{self_signup}{Allow students to sign up for a group themselves (Course Only). valid values are: “enabled”, allows students to self sign up for any group in course;  “restricted” allows students to self sign up only for groups in the same section null disallows self sign up}
@@ -26,12 +30,12 @@ create_group_category(
 \item{create_group_count}{Create this number of groups (Course Only).}
 }
 \value{
-
+invisible
 }
 \description{
 Does not work yet. Returns 422. Unclear how to fix.
 }
 \examples{
-create_group_category(1350207, "courses", "FinalProjectGroup",
-"enabled", "first", 3, 48)
+\donrun{create_group_category(1350207, "courses", "FinalProjectGroup",
+"enabled", "first", 3, 48)}
 }

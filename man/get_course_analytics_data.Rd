@@ -21,7 +21,7 @@ Returns a data.frame of course analytics data. Note: if an individual's user_id 
 the function will return a list.
 }
 \examples{
-#' get_course_analytics_data(course_id = 20)
-#' get_course_analytics_data(course_id = 17, type = "activity")
-#' get_course_analytics_data(course_id = 17, type = "student_summaries", user_id = 366)
+\dontrun{get_course_analytics_data(course_id = 20)}
+\dontrun{get_course_analytics_data(course_id = 17, type = "activity")}
+\dontrun{get_course_analytics_data(course_id = 17, type = "student_summaries", user_id = 366)}
 }

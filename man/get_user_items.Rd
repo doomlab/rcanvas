@@ -19,5 +19,5 @@ Get various user items
 }
 \examples{
 
-get_user_items(365, "details")
+\dontrun{get_user_items(365, "details")}
 }

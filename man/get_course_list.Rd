@@ -18,7 +18,7 @@ data frame
 Function to list all courses.
 }
 \examples{
-#' get_course_list()
-#' get_course_list(user_id = 366)
-#' get_course_list(include = c("teachers", "total_students"))
+#' \dontrun{get_course_list()}
+#' \dontrun{get_course_list(user_id = 366)}
+#' \dontrun{get_course_list(include = c("teachers", "total_students"))}
 }

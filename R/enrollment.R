@@ -6,6 +6,7 @@
 #' @param state enrollment state
 #' @param section if TRUE, course_id should be a section_id instead of a course_id and students will be enrolled into this section
 #' @param ... any other arguments passed to the API
+#' @export
 add_enrollment <- function(course_id, user_id, type, state, section=F, ...) {
   url <- paste0(canvas_url(),
                 paste(ifelse(section, "sections", "courses"), course_id, "enrollments", sep="/"))

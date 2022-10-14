@@ -10,7 +10,7 @@
 #' @export
 #' @rdname apihelpers
 #' @examples
-#' set_canvas_token("abc123")
+#' \dontrun{set_canvas_token("abc123")}
 set_canvas_token <- function(token) {
   keyring::key_set_with_value("rcanvas_CANVAS_API_TOKEN", NULL, token)
 }
@@ -22,12 +22,13 @@ cdenv <- new.env()
 #' @export
 #' @rdname apihelpers
 #' @examples
-#' set_canvas_domain("https://canvas.upenn.edu")
+#' \dontrun{set_canvas_domain("https://canvas.upenn.edu")}
 set_canvas_domain <- function(domain) {
   assign("rcanvas_CANVAS_DOMAIN", domain, envir = cdenv)
 }
 
 #' @rdname apihelpers
+#' @export
 check_token <- function() {
   token <- keyring::key_get("rcanvas_CANVAS_API_TOKEN")
   if (identical(token, "")) {
@@ -37,8 +38,12 @@ check_token <- function() {
   token
 }
 
+#' @rdname apihelpers
+#' @export
 canvas_url <- function() paste0(get("rcanvas_CANVAS_DOMAIN", envir = cdenv), "/api/v1")
 
+#' @rdname apihelpers
+#' @export
 make_canvas_url <- function(...) {
   url = paste(canvas_url(), ..., sep = "/")
   if (getOption('.rcanvas.show.url', default = FALSE)) {
@@ -48,6 +53,8 @@ make_canvas_url <- function(...) {
 }
 
 #' @importFrom httr GET POST PUT HEAD
+#' @rdname apihelpers
+#' @export
 canvas_query <- function(urlx, args = NULL, type = "GET") {
 
   args <- sc(args)
@@ -67,6 +74,8 @@ canvas_query <- function(urlx, args = NULL, type = "GET") {
 
 }
 
+#' @rdname apihelpers
+#' @export
 iter_args_list <- function(x, label) {
   ln <- list()
   for (i in seq_along(x)) {
@@ -76,10 +85,14 @@ iter_args_list <- function(x, label) {
   ln
 }
 
+#' @rdname apihelpers
+#' @export
 sc <- function(x) {
   purrr::discard(x, is.null)
 }
 
+#' @rdname apihelpers
+#' @export
 convert_dates <- function(base_date = Sys.Date(), days) {
   new_date <- base_date + lubridate::ddays(days)
   format(new_date, "%Y-%m-%d")
@@ -98,10 +111,10 @@ convert_dates <- function(base_date = Sys.Date(), days) {
 #' @export
 #' @examples
 #' # A get request to the announcements endpoint (replicating get_announcements):
-#' do_query("announcements", list(`context_codes[]`="course_1234"))
+#' \dontrun{do_query("announcements", list(`context_codes[]`="course_1234"))}
 #'
 #' # A post request to the group membership endpoint (replicating add_group_user):
-#' do_query(c("groups", 123, "memberships"), list(user_id=1), method = "POST")
+#' \dontrun{do_query(c("groups", 123, "memberships"), list(user_id=1), method = "POST")}
 do_query <- function(endpoint, args=NULL, method="GET", process_response=(method == "GET")) {
   endpoint = paste(endpoint, collapse="/")
   if (!grepl("^https?://", endpoint)) endpoint = paste0(canvas_url(), endpoint)

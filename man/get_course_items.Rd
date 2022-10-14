@@ -21,7 +21,7 @@ Returns a data.frame of various course items. See "item" argument below. Omittin
 returns a course object.
 }
 \examples{
-#' get_course_items(course_id = 20, item = "settings")
-#' get_course_items(course_id = 20, item = "enrollments")
-#' get_course_items(20, item = "users", include = "email")
+\dontrun{get_course_items(course_id = 20, item = "settings")}
+\dontrun{get_course_items(course_id = 20, item = "enrollments")}
+\dontrun{get_course_items(20, item = "users", include = "email")}
 }

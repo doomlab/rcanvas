@@ -9,9 +9,9 @@
 #' @export
 #'
 #' @examples
-#' #' get_course_list()
-#' #' get_course_list(user_id = 366)
-#' #' get_course_list(include = c("teachers", "total_students"))
+#' #' \dontrun{get_course_list()}
+#' #' \dontrun{get_course_list(user_id = 366)}
+#' #' \dontrun{get_course_list(include = c("teachers", "total_students"))}
 get_course_list <- function(user_id = NULL, include = NULL) {
   if (!is.null(user_id)) {
     url <- make_canvas_url("users", user_id, "courses")
@@ -28,6 +28,7 @@ get_course_list <- function(user_id = NULL, include = NULL) {
   return(unique(dat))
 }
 
+#' @export
 get_account_course_list <- function(acc_id = NULL, include = NULL) {
   if (!is.null(acc_id)) {
     url <- make_canvas_url("accounts", acc_id, "courses")
@@ -44,6 +45,7 @@ get_account_course_list <- function(acc_id = NULL, include = NULL) {
   return(unique(dat))
 }
 
+#' @export
 get_term_course_list <- function(term_id = NULL, acc_id = NULL, include = NULL) {
   if (!is.null(term_id)) {
     url <- paste0(canvas_url(), paste("accounts/", acc_id, "/courses?enrollment_term_id=", term_id, sep = "" ))
@@ -73,9 +75,9 @@ get_term_course_list <- function(term_id = NULL, acc_id = NULL, include = NULL) 
 #' @export
 #'
 #' @examples
-#' #' get_course_analytics_data(course_id = 20)
-#' #' get_course_analytics_data(course_id = 17, type = "activity")
-#' #' get_course_analytics_data(course_id = 17, type = "student_summaries", user_id = 366)
+#' \dontrun{get_course_analytics_data(course_id = 20)}
+#' \dontrun{get_course_analytics_data(course_id = 17, type = "activity")}
+#' \dontrun{get_course_analytics_data(course_id = 17, type = "student_summaries", user_id = 366)}
 get_course_analytics_data <- function(course_id, type = "assignments", user_id = NULL) {
   if (!is.null(user_id)) {
     url <- make_canvas_url("courses", course_id, "analytics/users", user_id, type)
@@ -107,9 +109,9 @@ get_course_analytics_data <- function(course_id, type = "assignments", user_id =
 #' @export
 #'
 #' @examples
-#' #' get_course_items(course_id = 20, item = "settings")
-#' #' get_course_items(course_id = 20, item = "enrollments")
-#' #' get_course_items(20, item = "users", include = "email")
+#' \dontrun{get_course_items(course_id = 20, item = "settings")}
+#' \dontrun{get_course_items(course_id = 20, item = "enrollments")}
+#' \dontrun{get_course_items(20, item = "users", include = "email")}
 get_course_items <- function(course_id, item, include = NULL) {
   valid_items <- c("settings", "discussion_topics", "todo", "enrollments", "users", "students",
                    "features", "assignments", "files", "modules", "front_page", "pages", "quizzes",
@@ -166,7 +168,7 @@ search_courses <- function(search=NULL) {
 #' @export
 #'
 #' @examples
-#' #' get_outcome_results(course_id = 20)
+#' \dontrun{get_outcome_results(course_id = 20)}
 get_outcome_results <- function(course_id) {
   url <- paste0(canvas_url(), paste("courses", course_id, "outcome_results", sep = "/"))
   args <- list(per_page = 100)

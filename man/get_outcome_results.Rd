@@ -16,5 +16,5 @@ data frame
 Returns a data.frame containing course outcome results.
 }
 \examples{
-#' get_outcome_results(course_id = 20)
+\dontrun{get_outcome_results(course_id = 20)}
 }

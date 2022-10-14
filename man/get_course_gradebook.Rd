@@ -18,6 +18,6 @@ A gradebook (in long format)
 Get a course gradebook
 }
 \examples{
-get_course_gradebook(20)
+\dontrun{get_course_gradebook(20)}
 
 }

@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-#' #' get_assignment_list()
+#' \dontrun{get_assignment_list()}
 get_assignment_list <- function(course_id = NULL) {
   stopifnot(!is.null(course_id))
 

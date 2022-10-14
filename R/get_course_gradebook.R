@@ -8,7 +8,7 @@
 #' @return A gradebook (in long format)
 #'
 #' @examples
-#' get_course_gradebook(20)
+#' \dontrun{get_course_gradebook(20)}
 #'
 #' @export
 get_course_gradebook <- function(course_id, progress = FALSE) {
@@ -37,6 +37,7 @@ get_course_gradebook <- function(course_id, progress = FALSE) {
   return(gradebook)
 }
 
+#' @export
 get_assignment_submissions <- function(course_id, assignment_id, page) {
   url <- sprintf("%s/courses/%s/assignments/%s/submissions",
                  canvas_url(), course_id, assignment_id)

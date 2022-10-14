@@ -16,5 +16,5 @@ data frame
 Function to list all assignments.
 }
 \examples{
-#' get_assignment_list()
+\dontrun{get_assignment_list()}
 }

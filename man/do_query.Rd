@@ -28,8 +28,8 @@ This function allows you to call methods which are not specifically exposed by t
 }
 \examples{
 # A get request to the announcements endpoint (replicating get_announcements):
-do_query("announcements", list(`context_codes[]`="course_1234"))
+\dontrun{do_query("announcements", list(`context_codes[]`="course_1234"))}
 
 # A post request to the group membership endpoint (replicating add_group_user):
-do_query(c("groups", 123, "memberships"), list(user_id=1), method = "POST")
+\dontrun{do_query(c("groups", 123, "memberships"), list(user_id=1), method = "POST")}
 }

@@ -44,7 +44,7 @@ A group of functions which deal with \href{https://canvas.instructure.com/doc/ap
 }
 }
 \examples{
-get_discussions_context(4371405)
-get_discussion_id(4371405, 1350207)
-update_discussion_id(4371405, 1350207, newtext)
+\dontrun{get_discussions_context(4371405)}
+\dontrun{get_discussion_id(4371405, 1350207)}
+\dontrun{update_discussion_id(4371405, 1350207, newtext)}
 }

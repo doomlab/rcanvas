@@ -7,14 +7,16 @@
 get_group_categories(course_id)
 }
 \arguments{
-\item{context_type}{}
+\item{context_id}{number of the course}
+
+\item{context_type}{either courses or accounts}
 }
 \value{
-
+dataframe of group categories
 }
 \description{
 Group categories
 }
 \examples{
-get_group_categories(1350207)
+\dontrun{get_group_categories(1350207)}
 }

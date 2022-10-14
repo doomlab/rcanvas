@@ -13,7 +13,7 @@
 #' @md
 #'
 #' @examples
-#' get_discussions_context(4371405)
+#' \dontrun{get_discussions_context(4371405)}
 get_discussions_context <- function(object_id, object_type = "courses",
                                     include = NULL) {
   stopifnot(object_type %in% c("courses", "groups"))
@@ -35,7 +35,7 @@ get_discussions_context <- function(object_id, object_type = "courses",
 #' @md
 #'
 #' @examples
-#' get_discussion_id(4371405, 1350207)
+#' \dontrun{get_discussion_id(4371405, 1350207)}
 get_discussion_id <- function(discussion_id, object_id, object_type = "courses") {
   stopifnot(object_type %in% c("courses", "groups"))
   url <- make_canvas_url(object_type, object_id, "discussion_topics", discussion_id)
@@ -56,7 +56,7 @@ get_discussion_id <- function(discussion_id, object_id, object_type = "courses")
 #' @md
 #'
 #' @examples
-#' update_discussion_id(4371405, 1350207, newtext)
+#' \dontrun{update_discussion_id(4371405, 1350207, newtext)}
 update_discussion_id <- function(discussion_id, object_id, message,
                                  object_type = "courses") {
   stopifnot(object_type %in% c("courses", "groups"))

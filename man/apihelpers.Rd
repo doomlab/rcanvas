@@ -5,6 +5,12 @@
 \alias{set_canvas_token}
 \alias{set_canvas_domain}
 \alias{check_token}
+\alias{canvas_url}
+\alias{make_canvas_url}
+\alias{canvas_query}
+\alias{iter_args_list}
+\alias{sc}
+\alias{convert_dates}
 \title{Canvas API helpers}
 \usage{
 set_canvas_token(token)
@@ -12,6 +18,18 @@ set_canvas_token(token)
 set_canvas_domain(domain)
 
 check_token()
+
+canvas_url()
+
+make_canvas_url(...)
+
+canvas_query(urlx, args = NULL, type = "GET")
+
+iter_args_list(x, label)
+
+sc(x)
+
+convert_dates(base_date = Sys.Date(), days)
 }
 \arguments{
 \item{token}{your API token}
@@ -23,6 +41,6 @@ These functions set your Canvas API token, as well as the Canvas base URL.
 These functions are necessary for \code{rcanvas} to run.
 }
 \examples{
-set_canvas_token("abc123")
-set_canvas_domain("https://canvas.upenn.edu")
+\dontrun{set_canvas_token("abc123")}
+\dontrun{set_canvas_domain("https://canvas.upenn.edu")}
 }

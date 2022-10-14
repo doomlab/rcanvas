@@ -40,5 +40,5 @@ invisible
 Upload a file to a course
 }
 \examples{
-upload_course_file(course_id = 13212, file_name = "activity.pdf")
+\dontrun{upload_course_file(course_id = 13212, file_name = "activity.pdf")}
 }
