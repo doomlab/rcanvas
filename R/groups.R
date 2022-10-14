@@ -182,7 +182,7 @@ get_group_category <- function(group_category_id) {
 #' @export
 #'
 #' @examples
-#' \donrun{create_group_category(1350207, "courses", "FinalProjectGroup",
+#' \dontrun{create_group_category(1350207, "courses", "FinalProjectGroup",
 #' "enabled", "first", 3, 48)}
 create_group_category <- function(context_id, context_type = "courses",
                                   cat_name, self_signup = NULL,

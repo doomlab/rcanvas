@@ -36,6 +36,6 @@ invisible
 Does not work yet. Returns 422. Unclear how to fix.
 }
 \examples{
-\donrun{create_group_category(1350207, "courses", "FinalProjectGroup",
+\dontrun{create_group_category(1350207, "courses", "FinalProjectGroup",
 "enabled", "first", 3, 48)}
 }
