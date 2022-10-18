@@ -23,8 +23,42 @@ get_submissions <- function(course_id, type, type_id) {
                          'submissions')
   args <- list(access_token = check_token(),
                per_page = 100)
+  include <- iter_args_list(NULL, "include[]=submission_history")
+  args <- c(args, include)
   process_response(url, args) %>%
     dplyr::mutate(course_id = course_id)
+}
+
+#' * `get_submissions_answers`: For given course and assignment/quiz, get submissions
+#'
+#' @importFrom magrittr %>%
+#' @rdname submissions
+#' @return Student submissions and answers
+#' @export
+#' @md
+#'
+#' @examples
+#' \dontrun{get_submissions_answers(27, "quizzes", 2915, 23)}
+#' \dontrun{get_submissions_answers(27, "assignments", 254, 23)}
+get_submissions_answers <- function(course_id, type, type_id, submission_id) {
+  if (!type %in% c("quizzes", "assignments"))
+    stop("type must be 'quizzes' or 'assignments'")
+  # /api/v1/courses/:course_id/quizzes/:quiz_id/submissions/:id/events
+  url <- make_canvas_url('courses', course_id, type, type_id,
+                         'submissions', submission_id, "events")
+  args <- list(access_token = check_token(),
+               per_page = 100)
+  resp <- canvas_query(url, args, "GET")
+  df <- paginate(resp) %>%
+    purrr::map(httr::content, "text") %>%
+    purrr::map(jsonlite::fromJSON, flatten = TRUE)
+  df <- df[[1]]$quiz_submission_events
+
+  df <- subset(df, event_type == "question_answered") %>%
+    tidyr::unnest(cols = "event_data")
+
+  df
+
 }
 
 #' * `get_submission_single`: Get a single submission, based on user id.

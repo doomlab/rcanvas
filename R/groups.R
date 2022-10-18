@@ -33,7 +33,7 @@ get_groups_self <- function() {
 #' \dontrun{get_groups_context(27)}
 get_groups_context <- function(object_id, object_type = "courses") {
   stopifnot(object_type %in% c("courses", "accounts"))
-  url <- paste0(canvas_url(), paste(object_type, object_id, "groups", sep = "/"))
+  url <- paste0(canvas_url(), "/", paste(object_type, object_id, "groups", sep = "/"))
   args <- list(per_page = 100)
   include <- iter_args_list(NULL, "include[]")
   args <- c(args, include)
@@ -60,7 +60,7 @@ get_group_users <- function(group_id, group_name) {
   if(missing(group_name)) {
     group_name <- NA
   }
-  url <- paste0(canvas_url(),
+  url <- paste0(canvas_url(), "/",
                 paste("groups", group_id, "users", sep = "/"))
   args <- list(per_page = 100)
   include <- iter_args_list(NULL, "include[]")

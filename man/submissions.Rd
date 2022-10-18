@@ -3,10 +3,13 @@
 \name{submissions}
 \alias{submissions}
 \alias{get_submissions}
+\alias{get_submissions_answers}
 \alias{get_submission_single}
 \title{Submission functions}
 \usage{
 get_submissions(course_id, type, type_id)
+
+get_submissions_answers(course_id, type, type_id, submission_id)
 
 get_submission_single(course_id, type, type_id, user_id)
 }
@@ -21,6 +24,8 @@ get_submission_single(course_id, type, type_id, user_id)
 }
 \value{
 Student submissions
+
+Student submissions and answers
 }
 \description{
 Submission functions
@@ -30,11 +35,17 @@ Submission functions
 }
 
 \itemize{
+\item \code{get_submissions_answers}: For given course and assignment/quiz, get submissions
+}
+
+\itemize{
 \item \code{get_submission_single}: Get a single submission, based on user id.
 }
 }
 \examples{
 \dontrun{get_submissions(27, "quizzes", 2915)}
 \dontrun{get_submissions(27, "assignments", 254)}
+\dontrun{get_submissions_answers(27, "quizzes", 2915, 23)}
+\dontrun{get_submissions_answers(27, "assignments", 254, 23)}
 \dontrun{get_submission_single(1350207, "assignments", 5681164, 4928217)}
 }
