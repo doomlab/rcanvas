@@ -15,8 +15,9 @@ get_course_gradebook <- function(course_id, progress = FALSE) {
   course_assignments <- get_course_items(course_id, "assignments")
 
   students <- get_course_items(course_id, "enrollments") %>%
-    dplyr::filter(role == "StudentEnrollment", user.name != "Test Student") %>%
-    dplyr::select(user.name, user_id, grades.final_score, course_id) %>%
+    dplyr::filter(type == "StudentEnrollment", user.name != "Test Student") %>%
+    dplyr::select(user.name, user_id, sis_user_id, user.login_id,
+                  grades.final_score, course_id) %>%
     unique()
 
   n_pages <- ceiling(nrow(students)/100)
