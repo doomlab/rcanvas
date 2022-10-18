@@ -20,7 +20,7 @@ get_course_gradebook <- function(course_id, progress = FALSE) {
                   grades.final_score, course_id) %>%
     unique()
 
-  n_pages <- ceiling(nrow(students)/100)
+  n_pages <- ceiling(nrow(students)*nrow(course_assignments)/1000) + 1
 
   gradebook <- purrr::map_df(seq_len(n_pages), function(page) {
     if(progress)
@@ -28,7 +28,7 @@ get_course_gradebook <- function(course_id, progress = FALSE) {
 
     submissions <- purrr::pmap_dfr(list(course_id, course_assignments$id, page),
                                    get_assignment_submissions)
-    gradebook_page <- dplyr::left_join(submissions, students, by = "user_id") %>%
+    gradebook_page <- dplyr::left_join(students, submissions, by = "user_id") %>%
       dplyr::left_join(course_assignments %>%
                          dplyr::select(id, assignment_name = name),
                        by = c("assignment_id" = "id"))
@@ -42,7 +42,7 @@ get_course_gradebook <- function(course_id, progress = FALSE) {
 get_assignment_submissions <- function(course_id, assignment_id, page) {
   url <- sprintf("%s/courses/%s/assignments/%s/submissions",
                  canvas_url(), course_id, assignment_id)
-  submissions <- canvas_query(url, args = list(per_page = 100, page = page)) %>%
+  submissions <- canvas_query(url, args = list(per_page = 1000, page = page)) %>%
     httr::content("text") %>%
     jsonlite::fromJSON(flatten = TRUE)
   return(submissions)
