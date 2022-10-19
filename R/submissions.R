@@ -52,10 +52,20 @@ get_submissions_answers <- function(course_id, type, type_id, submission_id) {
   df <- paginate(resp) %>%
     purrr::map(httr::content, "text") %>%
     purrr::map(jsonlite::fromJSON, flatten = TRUE)
+
   df <- df[[1]]$quiz_submission_events
+  df_data <- subset(df, event_type == "submission_created") %>%
+    tidyr::unnest(cols = "event_data") %>%
+    slice(2) %>%
+    pull(event_data) %>%
+    bind_rows()
 
   df <- subset(df, event_type == "question_answered") %>%
-    tidyr::unnest(cols = "event_data")
+    tidyr::unnest(cols = "event_data") %>%
+    mutate(quiz_question_id = as.numeric(quiz_question_id)) %>%
+    left_join(df_data %>%
+                select(id, question_name, question_text),
+              by = c("quiz_question_id" = "id"))
 
   df
 
