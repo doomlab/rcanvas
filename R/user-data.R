@@ -24,3 +24,18 @@ get_user_items <- function(user_id, item) {
   dat <- process_response(url, args)
   return(dat)
 }
+
+#' @export
+get_all_users <- function(acc_id = 1, include = NULL) {
+
+  url <- make_canvas_url("accounts", acc_id, "users")
+
+  args <- list(
+    per_page = 100,
+    acc_id = acc_id
+  )
+  include <- iter_args_list(include, "include[]")
+  args <- c(args, include)
+  dat <- process_response(url, args)
+  return(unique(dat))
+}
