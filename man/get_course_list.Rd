@@ -4,7 +4,7 @@
 \alias{get_course_list}
 \title{Function to list all courses.}
 \usage{
-get_course_list(user_id = NULL, include = NULL)
+get_course_list(user_id = NULL, account_id = NULL, include = NULL)
 }
 \arguments{
 \item{user_id}{Optional argument to specify courses for specific user id}

@@ -12,16 +12,16 @@
 #' #' \dontrun{get_course_list()}
 #' #' \dontrun{get_course_list(user_id = 366)}
 #' #' \dontrun{get_course_list(include = c("teachers", "total_students"))}
-get_course_list <- function(user_id = NULL, include = NULL) {
+get_course_list <- function(user_id = NULL, account_id = NULL, include = NULL) {
   if (!is.null(user_id)) {
     url <- make_canvas_url("users", user_id, "courses")
+  } else if (!is.null(account_id)) {
+    url  <- make_canvas_url("accounts", account_id, "courses")
   } else {
     url <- make_canvas_url("courses")
   }
-  args <- list(
-               per_page = 100,
-               user_id = user_id
-               )
+  args <- list(per_page = 100,
+               user_id = user_id)
   include <- iter_args_list(include, "include[]")
   args <- c(args, include)
   dat <- process_response(url, args)
@@ -145,12 +145,16 @@ get_course_items <- function(course_id, item, include = NULL) {
 #'   \dontrun{search_courses()}
 #'   \dontrun{search_courses(search="big data")}
 search_courses <- function(search=NULL) {
-  url <- paste0(canvas_url(), paste("search", "all_courses", sep = "/"))
-  args = list(per_page=100)
-  if (!is.null(search)) args["search"] = search
-  resp <- canvas_query(url, args, "GET")
 
-  resp = canvas_query(url, args, "GET") %>%
+  url <- paste0(canvas_url(), "/", paste("search", "all_courses", sep = "/"))
+
+  args <- list(per_page=100)
+
+  if (!is.null(search)) {
+    args[["search"]] <- search
+    }
+
+  resp <- canvas_query(url, args, "GET") %>%
     paginate() %>%
     purrr::map(httr::content, "text") %>%
     purrr::map(jsonlite::fromJSON, flatten = TRUE) %>%
