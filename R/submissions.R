@@ -31,6 +31,9 @@ get_submissions <- function(course_id, type, type_id) {
 
 #' * `get_submissions_answers`: For given course and assignment/quiz, get submissions
 #'
+#' Note: this only works for quiz logging
+#' and only for 9 months back of logging
+#'
 #' @importFrom magrittr %>%
 #' @rdname submissions
 #' @return Student submissions and answers
@@ -73,6 +76,8 @@ get_submissions_answers <- function(course_id, type, type_id, submission_id) {
 
 #' * `get_submission_single`: Get a single submission, based on user id.
 #'
+#' Note: this shows the quiz information regardless of logging
+#'
 #' @rdname submissions
 #' @param user_id id of user whose submission should be retrieved
 #'
@@ -80,18 +85,31 @@ get_submissions_answers <- function(course_id, type, type_id, submission_id) {
 #' @md
 #' @examples
 #' \dontrun{get_submission_single(1350207, "assignments", 5681164, 4928217)}
-get_submission_single <- function(course_id, type, type_id, user_id) {
-  if (!type %in% c("quizzes", "assignments"))
-    stop("type must be 'quizzes' or 'assignments'")
-  url <- make_canvas_url('courses', course_id, type, type_id,
-                         'submissions', user_id)
+get_submission_single <- function(course_id, type_id, user_id, assignment_id) {
+
+  url <- make_canvas_url('courses', course_id,
+                         "students/submissions/")
+
   args <- list(access_token = check_token(),
-               per_page = 100)
+               per_page = 500,
+               `include[]` = "submission_history",
+               `assignment_ids[]` = assignment_id,
+               `student_ids[]` = user_id)
+
   resp <- canvas_query(url, args, "GET")
   df <- paginate(resp) %>%
     purrr::map(httr::content, "text") %>%
     purrr::map(jsonlite::fromJSON, flatten = TRUE)
-  df[[1]]
+
+  df <- df[[1]]
+  answers <- t(df$submission_history[[1]]$submission_data[[1]]$text)
+  answers <- as.data.frame(answers)
+  colnames(answers) <- paste("Question_", 1:length(answers), sep = "")
+
+  df <- cbind(df, answers)
+
+  df
+
 }
 
 #' Respond to submission

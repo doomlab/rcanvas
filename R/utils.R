@@ -62,10 +62,11 @@ canvas_query <- function(urlx, args = NULL, type = "GET") {
                         httr::user_agent("rcanvas - https://github.com/daranzolin/rcanvas"),
                         httr::add_headers(Authorization = paste("Bearer", check_token())))
 
-  if (type %in% c("POST", "PUT"))
+  if (type %in% c("POST", "PUT")){
     resp_fun_args$body = args
-  else
+  } else {
     resp_fun_args$query = args
+  }
 
   resp <- do.call(type, resp_fun_args)
 

@@ -11,7 +11,7 @@ get_submissions(course_id, type, type_id)
 
 get_submissions_answers(course_id, type, type_id, submission_id)
 
-get_submission_single(course_id, type, type_id, user_id)
+get_submission_single(course_id, type_id, user_id, assignment_id)
 }
 \arguments{
 \item{course_id}{A valid canvas course id}
@@ -28,19 +28,10 @@ Student submissions
 Student submissions and answers
 }
 \description{
-Submission functions
+Note: this only works for quiz logging
+and only for 9 months back of logging
 
-\itemize{
-\item \code{get_submissions}: For given course and assignment/quiz, get submissions
-}
-
-\itemize{
-\item \code{get_submissions_answers}: For given course and assignment/quiz, get submissions
-}
-
-\itemize{
-\item \code{get_submission_single}: Get a single submission, based on user id.
-}
+Note: this shows the quiz information regardless of logging
 }
 \examples{
 \dontrun{get_submissions(27, "quizzes", 2915)}
