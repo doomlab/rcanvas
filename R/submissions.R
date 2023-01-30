@@ -103,10 +103,6 @@ get_submission_single <- function(course_id, type_id, user_id, assignment_id) {
 
   df <- df[[1]]
 
-  if (df$workflow_state == "unsubmitted"){
-    df
-  } else {
-
     answers <- t(df$submission_history[[1]]$submission_data[[1]]$text)
     answers <- as.data.frame(answers)
     colnames(answers) <- paste("Question_", 1:length(answers), sep = "")
@@ -116,8 +112,6 @@ get_submission_single <- function(course_id, type_id, user_id, assignment_id) {
     df
 
   }
-
-}
 
 #' Respond to submission
 #'
