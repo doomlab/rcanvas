@@ -28,11 +28,13 @@ get_course_gradebook <- function(course_id, progress = FALSE) {
 
     submissions <- purrr::pmap_dfr(list(course_id, course_assignments$id, page),
                                    get_assignment_submissions)
-    gradebook_page <- dplyr::left_join(students, submissions, by = "user_id") %>%
-      dplyr::left_join(course_assignments %>%
-                         dplyr::select(id, assignment_name = name),
-                       by = c("assignment_id" = "id"))
-    return(gradebook_page)
+    if (nrow(submissions) > 0){
+      gradebook_page <- dplyr::left_join(students, submissions, by = "user_id") %>%
+        dplyr::left_join(course_assignments %>%
+                           dplyr::select(id, assignment_name = name),
+                         by = c("assignment_id" = "id"))
+      return(gradebook_page)
+      }
   })
 
   return(gradebook)
