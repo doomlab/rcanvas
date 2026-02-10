@@ -118,7 +118,9 @@ convert_dates <- function(base_date = Sys.Date(), days) {
 #' \dontrun{do_query(c("groups", 123, "memberships"), list(user_id=1), method = "POST")}
 do_query <- function(endpoint, args=NULL, method="GET", process_response=(method == "GET")) {
   endpoint = paste(endpoint, collapse="/")
-  if (!grepl("^https?://", endpoint)) endpoint = paste0(canvas_url(), "/", endpoint)
+  if (!grepl("^https?://", endpoint)) {
+    endpoint <- paste0(canvas_url(), "/", sub("^/+", "", endpoint))
+  }
   if (process_response) {
     if (method != "GET") stop("Process_response can only be used on GET requests")
     process_response(endpoint, args)
